@@ -101,7 +101,7 @@ informative:
 --- abstract
 
 This document describes how the Messaging Layer Security (MLS) can be used in a federated environment where different MLS
-implementations can interoperate by defining the message format for user key retrieval. The document also describes some use
+implementations can interoperate by defining the message format for client key retrieval. The document also describes some use
 cases where federation could be useful.
 
 
@@ -186,10 +186,10 @@ Client:
   per device (keeping keys local to each device) or sync keys among
   a user's devices so that each user appears as a single client.
 
-User Init Key:
-: A short-lived HPKE key pair used to introduce a new
+Client Init Key:
+: A short-lived HPKE {{!I-D.irtf-cfrg-hpke}} key pair used to introduce a new
   client to a group.  Initialization keys are published for
-  each client (UserInitKey).
+  each client (ClientInitKey).
 
 Identity Key:
 : A long-lived signing key pair used to authenticate the sender of a
@@ -201,54 +201,24 @@ describe the structure of protocol messages.
 # Use cases
 
 ## Different Delivery Servers
-Different applications operated by different entities can use MLS to exchange E2EE messages.
-For example in email applications, clients of  email1.com can encrypt and decrypt E2EE email messages from email2.com. 
+Different applications operated by different entities can use MLS to exchange end-to-end encrypted messages.
+For example in email applications, clients of email1.com can encrypt and decrypt end-to-end encrypted email messages from email2.com. 
 
 
 ## Different client applications
-Different client applications operated by the same server can use MLS to exchange E2EE handshake and application messages.
+Different client applications operated by the same server can use MLS to exchange end-to-end encrypted handshake and application messages.
 For example different browsers can implement the MLS protocol, and web developers write web applications that use the MLS 
 implementation in the browser to encrypt and decrypt the messages. This will require a new standard Web API to allow the
 client applications to set the address of the delivery service in the browser. A more concrete example is using MLS in the browser
-to exchange SRTP keys for multi-party conference call.
+to negotiate SRTP keys for multi-party conference calls.
 
 
 # Functional Requirements
 
 ## Delivery service
-In MLS environment the messages can either be delivered using client fanout or server fanout, each will have different requirements. 
+In a federated environment, the different members of a group might use different Delivery Services. Each client SHOULD only connect to its respective Deliver Service, which in turn will connect to other Delivery Services to relay messages.
 
-In a federated environment the client may communicate with one or more delivery services. Discovering the delivery service 
-and syncing between different delivery services are out of scope of this document.
-
-### Client fanout
-In this mode, the client SHOULD support communicating with multiple delivery services. Discovering the delivery service 
-is out of scope of this document.
-
-~~~~
-                           +-----------------+            +---------+  
-                          + Deliver Service B + +------> + Client B1 +
-             +----------> +                   +           +---------+ 
-             |             +-----------------+                       
-             |                                                       
- +---------+ |             +-----------------+            +---------+ 
-+ Client A1 +-----------> + Deliver Service A + +------> + Client A2 +
- +---------+ |            +                   +           +---------+ 
-             |             +-----------------+                       
-             |                                                       
-             |             +-----------------+            +---------+ 
-             +----------> + Deliver Service C + +------> + Client C1 +
-                          +                   +           +---------+ 
-                           +-----------------+                       
-             
-~~~~
-
-In this mode, the delivery service SHPULD be stateless, and it the clients responsibility to maintain the group state.
-OPEN QUESTION: How ordering could be enforced in this mode?
-
-### Server fanout
-Multiple delivery services can be avoided, with server side fan out, and all keys requests can be proxied through a single delivery service. 
-The protocol between different delivery services is out of the scope of this document.
+One Delivery Service MUST be responsible for handshake message ordering at any given point in time, since TreeKEM requires handshake messages to have a total order. It MUST be clear to all clients and Delivery Services of the group which Delivery Service is responsible. The protocol between different delivery services is out of the scope of this document.
 
 ~~~~
                                +-----------------+         +---------+ 
@@ -270,13 +240,13 @@ The protocol between different delivery services is out of the scope of this doc
 
 OPEN QUESTION: How server assist could be used with multiple servers? how the server state is shared and synced ?
 
-##Authentication service
-There is no change needed for the authentication service, however the authentication in a federated environment becomes more important. 
+## Authentication Service
+There is no change needed for the Authentication Service, however authentication in a federated environment becomes more important. 
 The ideal solution would be using a shared transparency log like {{KeyTransparency}}.
 
 # Message format
 The encrypted message payload is defined in the MLS protocol document {{MLSPROTO}}, in order to get federation between different systems, 
-the identity key and user init key retrieval MUST be defined as well. The identity key can always be included in the user init key response.
+the identity key and client init key retrieval MUST be defined as well. The identity key can always be included in the client init key response.
 
 ~~~~~
 enum {
@@ -288,28 +258,28 @@ enum {
 struct {
    opaque identity<0..2^16-1>;
    CipherSuite supported_suites<0..255>;
-}  GetUserInitKeyRequest;
+}  GetClientInitKeyRequest;
 
 struct {
-	opaque user_init_key_id<0..255>;
+	opaque client_init_key_id<0..255>;
 	CipherSuite cipher_suites<0..255>;
 	HPKEPublicKey init_keys<1..2^16-1>;
 	Credential credential;
 	opaque signature<0..2^16-1>;
-} UserInitKey;
+} ClientInitKey;
 
 struct {
 	opaque identity<0..2^16-1>;
-	UserInitKey user_init_key;
-} UserInitKeyBundle;
+	ClientInitKey client_init_key;
+} ClientInitKeyBundle;
 ~~~~~
 
-The delivery service will return one or more user init key bundles, one for each member.
+The delivery service will return one or more client init key bundles, one for each member.
 
 ~~~~~
 struct {
-   UserInitKeyBundle user_init_keys<0..2^32-1>;
-}  GetUserInitKeyResponse;
+   CLientInitKeyBundle client_init_keys<0..2^32-1>;
+}  GetClientInitKeyResponse;
 ~~~~~
 
 OPEN QUESTION: What if different clients have different cipher suites?
@@ -318,7 +288,7 @@ OPEN QUESTION: What if different clients have different cipher suites?
 
 ## Version negotiation
 In a federated environment, version negotiation is more critical, to avoid forcing a downgrade attack by
-malicious 3rd party delivery services. The negotiation could either be done in the UserInitKeyBundle or
+malicious 3rd party delivery services. The negotiation could either be done in the ClientInitKeyBundle or
 in a separate handshake message.
 
 # IANA Considerations

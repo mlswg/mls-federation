@@ -147,13 +147,13 @@ The below diagram shows an MLS group where all clients are operated under the sa
 
 one possible environment is to have different client implementations operated by the same delivery service,
 which will look like the diagram above, another environment is to have different or same clients operated
-By different delivery services:
+by different delivery services:
 
 ~~~~
-           +-----------------+      +-----------------+  
-          + Deliver Service 1 +    + Deliver Service 2 + 
-          +                   +    +                   + 
-           +-----------------+      +--------+--------+  
+           +------------------+      +------------------+
+          + Delivery Service 1 +    + Delivery Service 2 +
+          +                    +    +                    +
+           +------------------+      +-------+----------+
                |         |                   |           
                |         |                   |      Group
 ***************|*********|*******************|***********

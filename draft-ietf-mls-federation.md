@@ -123,7 +123,7 @@ There is no changes needed for the Authentication Service.
 Discovering which Delivery service the client communicates with is out of the scope of this document.
 
 
-The below diagram shows an MLS group where all clients are operated under the same deliver service:
+The below diagram shows an MLS group where all clients are operated under the same delivery service:
 
 ~~~~
                        +------------+                    
@@ -216,32 +216,35 @@ to negotiate SRTP keys for multi-party conference calls.
 # Functional Requirements
 
 ## Delivery service
-In a federated environment, the different members of a group might use different Delivery Services. Each client SHOULD only connect to its respective Deliver Service, which in turn will connect to other Delivery Services to relay messages.
+In a federated environment, the different members of a group might use different Delivery Services. Each client SHOULD only connect to its
+respective Delivery Service, which in turn will connect to other Delivery Services to relay messages.
 
-One Delivery Service MUST be responsible for handshake message ordering at any given point in time, since TreeKEM requires handshake messages to have a total order. It MUST be clear to all clients and Delivery Services of the group which Delivery Service is responsible. The protocol between different delivery services is out of the scope of this document.
+One Delivery Service MUST be responsible for handshake message ordering at any given point in time, since TreeKEM requires handshake
+messages to have a total order. It MUST be clear to all clients and Delivery Services of the group which Delivery Service is responsible.
+The protocol between different delivery services is out of the scope of this document.
 
 ~~~~
-                               +-----------------+         +---------+ 
-                         +--> + Deliver Service B + +---> + Client B1 +
-                         |    +                   +        +---------+ 
+                               +-----------------+          +---------+
+                         +--> + Delivery Service B + +---> + Client B1 +
+                         |    +                    +        +---------+
                          |     +-----------------+                     
                          |                                             
-                     +---+-------------+                   +---------+ 
- +---------+        + Deliver Service A + +-------------> + Client A2 +
-+ Client A1 + +---> +                   +                  +---------+ 
+                     +---+-------------+                    +---------+
+ +---------+        + Delivery Service A + +-------------> + Client A2 +
++ Client A1 + +---> +                    +                  +---------+
  +---------+         +------+----------+                                  
                          |                                             
-                         |     +-----------------+         +---------+ 
-                         +--> + Deliver Service C + +---> + Client C1 +
-                              +                   +        +---------+ 
+                         |     +-----------------+          +---------+
+                         +--> + Delivery Service C + +---> + Client C1 +
+                              +                    +        +---------+
                                +-----------------+                     
                                                                                                                                                                                                                                                     
 ~~~~
 
-OPEN QUESTION: How server assist could be used with multiple servers? how the server state is shared and synced ?
+OPEN QUESTION: How server assist could be used with multiple servers? How is the server state shared and synced ?
 
 ## Authentication Service
-There is no change needed for the Authentication Service, however authentication in a federated environment becomes more important. 
+There is no change needed for the Authentication Service. However, authentication in a federated environment becomes more important.
 The ideal solution would be using a shared transparency log like {{KeyTransparency}}.
 
 # Message format

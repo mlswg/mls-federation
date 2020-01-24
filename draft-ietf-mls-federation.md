@@ -100,7 +100,7 @@ informative:
 
 --- abstract
 
-This document describes how the Messaging Layer Security (MLS) can be used in a federated environment where different MLS
+This document describes how Messaging Layer Security (MLS) can be used in a federated environment where different MLS
 implementations can interoperate by defining the message format for client key retrieval. The document also describes some use
 cases where federation could be useful.
 
@@ -109,11 +109,11 @@ cases where federation could be useful.
 
 # Introduction
 
-MLS Architecture draft {{MLSARCH}} describes the overall MLS system architecture
+The MLS Architecture draft {{MLSARCH}} describes the overall MLS system architecture
 assuming the client and servers (Delivery Service and Authentication Service) are operated
 by the same entity. This document describes the minimum changes needed to allow different
-MLS clients operated by the same or different entities to communicate with each and explaining
-The use cases where federation could be useful.
+MLS clients operated by the same or different entities to communicate with each other. It also
+describes the use cases where federation could be useful.
  
 
 The focus of this document will be the interaction between the client and the Delivery Service,

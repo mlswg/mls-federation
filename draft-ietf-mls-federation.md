@@ -22,7 +22,7 @@ author:
     name: Raphael Robert
     organization: Wire
     email: raphael@wire.com
- 
+
 
 informative:
 
@@ -34,31 +34,31 @@ informative:
             name: Emad Omara
             organization: Google
             email: emadomara@google.com
-         -  
+         -
             ins: R. Barnes
             name: Richard Barnes
             organization: Cisco
             email: rlb@ipv.sx
          -
-	    ins: E. Rescorla 
+            ins: E. Rescorla
             name: Eric Rescorla
-            organization: Mozilla 
+            organization: Mozilla
             email: ekr@rtfm.com
          -
-            ins: S. Inguva 
-            name: Srinivas Inguva 
-            organization: Twitter 
+            ins: S. Inguva
+            name: Srinivas Inguva
+            organization: Twitter
             email: singuva@twitter.com
          -
-            ins: A. Kwon 
+            ins: A. Kwon
             name: Albert Kwon
-            organization: MIT 
+            organization: MIT
             email: kwonal@mit.edu
          -
-            ins: A. Duric 
+            ins: A. Duric
             name: Alan Duric
-            organization: Wire 
-            email: alan@wire.com 
+            organization: Wire
+            email: alan@wire.com
 
 
   MLSPROTO:
@@ -114,11 +114,11 @@ assuming the client and servers (Delivery Service and Authentication Service) ar
 by the same entity. This document describes the minimum changes needed to allow different
 MLS clients operated by the same or different entities to communicate with each and explaining
 The use cases where federation could be useful.
- 
+
 
 The focus of this document will be the interaction between the client and the Delivery Service,
 specifically how the client retrieves the identityKey and InitKeys for another client.
-There is no changes needed for the Authentication Service. 
+There is no changes needed for the Authentication Service.
 
 Discovering which Delivery service the client communicates with is out of the scope of this document.
 
@@ -126,10 +126,10 @@ Discovering which Delivery service the client communicates with is out of the sc
 The below diagram shows an MLS group where all clients are operated under the same deliver service:
 
 ~~~~
-                       +------------+                    
-                      + Delivery     +                   
-                      + Service (DS) +                   
-                       +-----+------+                    
+                       +------------+
+                      + Delivery     +
+                      + Service (DS) +
+                       +-----+------+
                     /        +        \             Group
 *********************************************************
 *                 /          +          \               *
@@ -150,11 +150,11 @@ which will look like the diagram above, another environment is to have different
 By different delivery services:
 
 ~~~~
-           +-----------------+      +-----------------+  
-          + Deliver Service 1 +    + Deliver Service 2 + 
-          +                   +    +                   + 
-           +-----------------+      +--------+--------+  
-               |         |                   |           
+           +-----------------+      +-----------------+
+          + Deliver Service 1 +    + Deliver Service 2 +
+          +                   +    +                   +
+           +-----------------+      +--------+--------+
+               |         |                   |
                |         |                   |      Group
 ***************|*********|*******************|***********
 *              |         |                   |          *
@@ -202,12 +202,12 @@ describe the structure of protocol messages.
 
 ## Different Delivery Servers
 Different applications operated by different entities can use MLS to exchange end-to-end encrypted messages.
-For example in email applications, clients of email1.com can encrypt and decrypt end-to-end encrypted email messages from email2.com. 
+For example in email applications, clients of email1.com can encrypt and decrypt end-to-end encrypted email messages from email2.com.
 
 
 ## Different client applications
 Different client applications operated by the same server can use MLS to exchange end-to-end encrypted handshake and application messages.
-For example different browsers can implement the MLS protocol, and web developers write web applications that use the MLS 
+For example different browsers can implement the MLS protocol, and web developers write web applications that use the MLS
 implementation in the browser to encrypt and decrypt the messages. This will require a new standard Web API to allow the
 client applications to set the address of the delivery service in the browser. A more concrete example is using MLS in the browser
 to negotiate SRTP keys for multi-party conference calls.
@@ -221,38 +221,38 @@ In a federated environment, the different members of a group might use different
 One Delivery Service MUST be responsible for handshake message ordering at any given point in time, since TreeKEM requires handshake messages to have a total order. It MUST be clear to all clients and Delivery Services of the group which Delivery Service is responsible. The protocol between different delivery services is out of the scope of this document.
 
 ~~~~
-                               +-----------------+         +---------+ 
+                               +-----------------+         +---------+
                          +--> + Deliver Service B + +---> + Client B1 +
-                         |    +                   +        +---------+ 
-                         |     +-----------------+                     
-                         |                                             
-                     +---+-------------+                   +---------+ 
+                         |    +                   +        +---------+
+                         |     +-----------------+
+                         |
+                     +---+-------------+                   +---------+
  +---------+        + Deliver Service A + +-------------> + Client A2 +
-+ Client A1 + +---> +                   +                  +---------+ 
- +---------+         +------+----------+                                  
-                         |                                             
-                         |     +-----------------+         +---------+ 
++ Client A1 + +---> +                   +                  +---------+
+ +---------+         +------+----------+
+                         |
+                         |     +-----------------+         +---------+
                          +--> + Deliver Service C + +---> + Client C1 +
-                              +                   +        +---------+ 
-                               +-----------------+                     
-                                                                                                                                                                                                                                                    
+                              +                   +        +---------+
+                               +-----------------+
+                                                                                                                                      
 ~~~~
 
 OPEN QUESTION: How server assist could be used with multiple servers? how the server state is shared and synced ?
 
 ## Authentication Service
-There is no change needed for the Authentication Service, however authentication in a federated environment becomes more important. 
+There is no change needed for the Authentication Service, however authentication in a federated environment becomes more important.
 The ideal solution would be using a shared transparency log like {{KeyTransparency}}.
 
 # Message format
-The encrypted message payload is defined in the MLS protocol document {{MLSPROTO}}, in order to get federation between different systems, 
+The encrypted message payload is defined in the MLS protocol document {{MLSPROTO}}, in order to get federation between different systems,
 the identity key and client init key retrieval MUST be defined as well. The identity key can always be included in the client init key response.
 
 ~~~~~
 enum {
-	P256_SHA256_AES128GCM(0x0000),
-	X25519_SHA256_AES128GCM(0x0001),
-	(0xFFFF)
+    P256_SHA256_AES128GCM(0x0000),
+    X25519_SHA256_AES128GCM(0x0001),
+    (0xFFFF)
 } CipherSuite;
 
 struct {
@@ -261,16 +261,16 @@ struct {
 }  GetClientInitKeyRequest;
 
 struct {
-	opaque client_init_key_id<0..255>;
-	CipherSuite cipher_suites<0..255>;
-	HPKEPublicKey init_keys<1..2^16-1>;
-	Credential credential;
-	opaque signature<0..2^16-1>;
+    opaque client_init_key_id<0..255>;
+    CipherSuite cipher_suites<0..255>;
+    HPKEPublicKey init_keys<1..2^16-1>;
+    Credential credential;
+    opaque signature<0..2^16-1>;
 } ClientInitKey;
 
 struct {
-	opaque identity<0..2^16-1>;
-	ClientInitKey client_init_key;
+    opaque identity<0..2^16-1>;
+    ClientInitKey client_init_key;
 } ClientInitKeyBundle;
 ~~~~~
 
@@ -282,7 +282,7 @@ struct {
 }  GetClientInitKeyResponse;
 ~~~~~
 
-OPEN QUESTION: What if different clients have different cipher suites?
+<!-- OPEN QUESTION: What if different clients have different cipher suites? -->
 
 # Security Considerations
 

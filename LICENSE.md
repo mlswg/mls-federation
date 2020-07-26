@@ -1,4 +1,4 @@
 # License
 
 See the
-[guidelines for contributions](https://github.com/mlswg/mls-architecture/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/mlswg/mls-federation/blob/federation-import/CONTRIBUTING.md).

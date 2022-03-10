@@ -13,15 +13,20 @@ pi: [toc, sortrefs, symrefs]
 
 author:
  -
+    ins: R. Robert
+    name: Raphael Robert
+    organization: 
+    email: ietf@raphaelrobert.com
+ -
     ins: E. Omara
     name: Emad Omara
     organization: Google
     email: emadomara@google.com
  -
-    ins: R. Robert
-    name: Raphael Robert
+    ins: R. Mahy
+    name: Rohan Mahy
     organization: Wire
-    email: raphael@wire.com
+    email: rohan@wire.com
 
 
 informative:
@@ -293,3 +298,9 @@ in a separate handshake message.
 
 # IANA Considerations
 This document makes no requests of IANA.
+
+# Contributors
+
+* Konrad Kohbrok \\
+  Aalto University \\
+  konrad.kohbrok@datashrine.de

@@ -23,6 +23,11 @@ author:
     organization: 
     email: ietf@raphaelrobert.com
 
+informative:
+  keytransparency:
+    title: Key Transparency
+    target: https://github.com/google/keytransparency
+
 --- abstract
 
 This document describes how the Messaging Layer Security (MLS) protocol can be
@@ -140,7 +145,7 @@ In a federated environment, authentication becomes more important. While the
 sepcifics of an Authentication Service are out-of-scope for MLS in general, it
 is important that strong authentication is accessible to all clients of a
 federated environment. As an example, a shared transparency log like
-{{KeyTransparency}} could be used.
+{{keytransparency}} could be used.
 
 # Further considerations
 
@@ -207,17 +212,10 @@ out of the scope of this document.
                                                                                                                                       
 ~~~~
 
-## Authentication Service
-
-In a federated environment, authentication becomes more important. While the
-sepcifics of an Authentication Service are out-of-scope for MLS in general, it
-is important that strong authentication is accessible to all clients of a
-federated environment. As an example, a shared transparency log like
-{{KeyTransparency}} could be used.
 
 # Security Considerations
 
-## Version  & ciphersuite negotiation
+## Version & ciphersuite negotiation
 
 In a federated environment, version & ciphersuite negotiation is more critical,
 to avoid forcing a downgrade attack by malicious third party Delivery Services.

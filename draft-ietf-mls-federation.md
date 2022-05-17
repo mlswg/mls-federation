@@ -241,8 +241,28 @@ One Delivery Service MUST be responsible for handshake message ordering at any g
 OPEN QUESTION: How server assist could be used with multiple servers? how the server state is shared and synced ?
 
 ## Authentication Service
-There is no change needed for the Authentication Service, however authentication in a federated environment becomes more important.
-The ideal solution would be using a shared transparency log like {{KeyTransparency}}.
+
+The MLS specification only describes how the signatures on the contents of the
+leaf nodes of a given group can be verified and that clients have to support the
+signature schemes of all other clients in each group.
+
+The credential (and thus the binding between identity of the group member and
+its signature public key) in each (non-blank) leaf node has to be authenticated
+by the AS. This becomes relevant in a federated setting, as the AS, and thus the
+authentication process of each member in a given group might differ.
+
+This problem can be solved in a variety of ways, for example, by having all
+applications and/or service providers involved in a federation agree on a shared
+process, or by having clients advertise their authentication process in a
+similar way as their ciphersuite, with the requirement that all members of a
+group must support each others authentication processes.
+
+Depending on the design of the AS of a given client, other, federated clients
+might have to trust that client's service provider to authenticate its
+credential. Confidence in authentication provided by service providers in
+general can be strengthened by using a scheme such as {{KeyTransparency}}, which
+allows both local and federated clients to assert a shared view of the
+authentication information provided by the service.
 
 # Message format
 The encrypted message payload is defined in the MLS protocol document {{MLSPROTO}}, in order to get federation between different systems,

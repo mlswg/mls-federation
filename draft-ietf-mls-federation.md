@@ -121,7 +121,7 @@ clients applications operate on different Delivery Services:
 ## Authentication Service
 
 In a federated environment, authentication becomes more important. While the
-sepcifics of an Authentication Service are out-of-scope for MLS in general, it
+specifics of an Authentication Service are out-of-scope for MLS in general, it
 is important that strong authentication is accessible to all clients of a
 federated environment. As an example, a shared transparency log like
 {{keytransparency}} could be used.

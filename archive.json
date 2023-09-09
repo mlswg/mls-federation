@@ -1,0 +1,395 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-05-22T01:41:57.451983+00:00",
+  "repo": "mlswg/mls-federation",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "MDU6SXNzdWU1MDA5OTkzNzU=",
+      "title": "Notes from the interim (Oct 2019)",
+      "url": "https://github.com/mlswg/mls-federation/issues/1",
+      "state": "CLOSED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": " - drop client fanout\r\n - specify why (policy enforcement, metadata protection)\r\n - incorporated comments from SV\r\n - check if it is necessary to define server-to-server message formats\r\n - only one domain is responsible for a group",
+      "createdAt": "2019-10-01T16:10:31Z",
+      "updatedAt": "2019-10-10T16:13:03Z",
+      "closedAt": "2019-10-10T16:13:03Z",
+      "comments": [
+        {
+          "author": "ianopolous",
+          "authorAssociation": "NONE",
+          "body": "I'm very interested in the details of this, but was unable to attend the interim meeting. \r\n\r\nDoes this mean that we are explicitly ruling out client fanout entirely? What metadata are we trying to protect here? You could in theory protect all the metadata with client fanout over Tor for example. \r\n\r\nDoes domain here mean domain name? Why is that relevant? (I'd expect MLS to be independent of DNS)\r\n\r\nThe kind of federated delivery service I'm hoping to be able to use with MLS is logically an append only list of messages published by each member. Where each member can read any other members queue and pull messages they don't have into their own queue (they push their own messages to their own queue only). This allows for diverse P2P topologies, and bandwidth efficient routing. This would be compatible with both [SSB](https://www.scuttlebutt.nz/) and [Peergos](https://github.com/peergos/peergos).",
+          "createdAt": "2019-10-02T16:47:03Z",
+          "updatedAt": "2019-10-02T16:47:03Z"
+        },
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "\r\n> Does this mean that we are explicitly ruling out client fanout entirely? What metadata are we trying to protect here? You could in theory protect all the metadata with client fanout over Tor for example.\r\n\r\nTreeKEM has the requirement of total ordering of handshake messages which doesn't work with client fanout. Therefore we drop the idea of client fanout until we have a better proposal on how to solve this.\r\n\r\n> Does domain here mean domain name? Why is that relevant? (I'd expect MLS to be independent of DNS)\r\n\r\n`Domain` is more conceptual, it doesn't have to be an actual domain name.\r\n",
+          "createdAt": "2019-10-04T09:41:37Z",
+          "updatedAt": "2019-10-04T09:41:37Z"
+        },
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "Addressed in #2.",
+          "createdAt": "2019-10-10T16:13:03Z",
+          "updatedAt": "2019-10-10T16:13:03Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "MDU6SXNzdWU3NDA3MTI5NDQ=",
+      "title": "MLS requires centralized Delivery Service for ordering Handshake Messages",
+      "url": "https://github.com/mlswg/mls-federation/issues/6",
+      "state": "CLOSED",
+      "author": "ntninja",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The fact that MLS requires all parties of a group to send their Handshake Messages through a single previously agreed-upon Delivery Service to achieve the required total/global ordering of such messages makes it unusable in the context of any messaging protocol featuring a fully distributed or eventually-consistent group messaging architecture (such as [Matrix](https://matrix.org/docs/spec), [Tox](https://toktok.ltd/spec.html#introduction), [SSB](https://ssbc.github.io/scuttlebutt-protocol-guide/), [psyc2](https://gnunet.org/sites/default/files/gnunet-psyc.pdf) and others).\r\n\r\nThis issue was already brought up [on the project's mailing list](https://mailarchive.ietf.org/arch/msg/mls/MnLJkbJ_Mwe8Oz0Ll6delGJLPz4/) in 2018 by Matrix creator and lead Matthew Hodgson, but was and is considered infeasible to solve using the TreeKEM algorithm at the core of current MLS. **Using MLS for end-to-end encryption in any eventually-consistent group messaging architectures is therefor effectively considered out-of-scope.**\r\n\r\n(This issue is placed here for the benefit of other potentially interested parties wondering the same thing after reading the MLS architectural overview or federation drafts. It is obvious that this is not an actionable item at this point.)",
+      "createdAt": "2020-11-11T12:01:33Z",
+      "updatedAt": "2020-11-11T12:01:37Z",
+      "closedAt": "2020-11-11T12:01:37Z",
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzI1Njg3MjAy",
+      "title": "Changes from MLS interim 2019 London",
+      "url": "https://github.com/mlswg/mls-federation/pull/2",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": " - Addressed SV's comments\r\n - Remove the client fanout concept (because of TreeKEM's handshake ordering requirements)\r\n - Rename UserInitKeys to ClientInitKeys\r\n - Minor editorial edits",
+      "createdAt": "2019-10-08T09:42:38Z",
+      "updatedAt": "2019-10-09T03:21:08Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "federation-import",
+      "baseRefOid": "50f9c8ae3d1d1c2b3eeff54a0503a5739c11b978",
+      "headRepository": "raphaelrobert/mls-federation",
+      "headRefName": "patch-1",
+      "headRefOid": "8dad678f8ec372ec244bf27484974464eb3fe519",
+      "closedAt": "2019-10-09T03:21:08Z",
+      "mergedAt": "2019-10-09T03:21:08Z",
+      "mergedBy": "eomara",
+      "mergeCommit": {
+        "oid": "52e11aa3a3d1a53debc63ad727d4d430148b7f7b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mjk5MTUyMjM0",
+          "commit": {
+            "abbreviatedOid": "8dad678"
+          },
+          "author": "eomara",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-10-09T03:21:00Z",
+          "updatedAt": "2019-10-09T03:21:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY2ODc1ODA1",
+      "title": "Spelling fixes in various sections.",
+      "url": "https://github.com/mlswg/mls-federation/pull/3",
+      "state": "CLOSED",
+      "author": "GaPhil",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR aims to fix some odd formulations, whilst maintaining the intended meaning of the sentences.",
+      "createdAt": "2020-01-24T14:58:02Z",
+      "updatedAt": "2022-03-10T17:33:12Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "federation-import",
+      "baseRefOid": "52e11aa3a3d1a53debc63ad727d4d430148b7f7b",
+      "headRepository": null,
+      "headRefName": "federation-import",
+      "headRefOid": "620e2ead13b06bce5f97de5e4039d4b8ba1ece37",
+      "closedAt": "2022-03-10T17:33:12Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "GaPhil",
+          "authorAssociation": "NONE",
+          "body": "There are similar fixes that could be added to `master`.",
+          "createdAt": "2020-01-24T15:01:57Z",
+          "updatedAt": "2020-01-24T15:01:57Z"
+        },
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "\ud83d\udc4d\r\n\r\nLet me know when you're done and I'll review and merge",
+          "createdAt": "2020-01-24T19:24:49Z",
+          "updatedAt": "2020-01-24T19:24:49Z"
+        },
+        {
+          "author": "GaPhil",
+          "authorAssociation": "NONE",
+          "body": "@raphaelrobert See https://github.com/mlswg/mls-federation/pull/4 for the `master` PR.",
+          "createdAt": "2020-01-27T12:05:03Z",
+          "updatedAt": "2020-01-27T12:05:03Z"
+        },
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "Closing this since the document will be reworked completely.",
+          "createdAt": "2022-03-10T17:33:12Z",
+          "updatedAt": "2022-03-10T17:33:12Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY3NDU1MDM4",
+      "title": "Spelling fixes in various sections.",
+      "url": "https://github.com/mlswg/mls-federation/pull/4",
+      "state": "CLOSED",
+      "author": "GaPhil",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR aims to fix some odd formulations, whilst maintaining the intended meaning of the sentences.\r\n\r\nSee the PR: https://github.com/mlswg/mls-federation/pull/3\r\n",
+      "createdAt": "2020-01-27T12:04:15Z",
+      "updatedAt": "2021-04-14T14:29:14Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "master",
+      "baseRefOid": "50f9c8ae3d1d1c2b3eeff54a0503a5739c11b978",
+      "headRepository": null,
+      "headRefName": "master",
+      "headRefOid": "1887ccf52d0698d83c2c9d237b63c31eaf3fdff1",
+      "closedAt": "2021-04-14T14:29:14Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDUzOTEzOTQ1",
+      "title": "Update build",
+      "url": "https://github.com/mlswg/mls-federation/pull/5",
+      "state": "MERGED",
+      "author": "Bren2010",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This should give you the same GitHub pages website as mls-protocol.\r\n\r\nOne this is merged, someone with push access to the repo will need to run:\r\n```\r\nmake\r\nmake -f lib/setup.mk setup-ghpages\r\n```\r\n\r\n- It doesn't look like Pages it on. You can try turning it off and back on in the Settings tab and that will trigger a new deploy.\r\n- Leave the domain for Pages as the default, not \"federation.messaginglayersecurity.rocks\" or something similar",
+      "createdAt": "2020-07-20T22:54:01Z",
+      "updatedAt": "2020-08-01T19:32:02Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "federation-import",
+      "baseRefOid": "52e11aa3a3d1a53debc63ad727d4d430148b7f7b",
+      "headRepository": "Bren2010/mls-federation",
+      "headRefName": "brendan/update-build",
+      "headRefOid": "c52c002a3d5440ecf87b4d925032a584caf63827",
+      "closedAt": "2020-07-26T20:57:32Z",
+      "mergedAt": "2020-07-26T20:57:32Z",
+      "mergedBy": "eomara",
+      "mergeCommit": {
+        "oid": "f521c5039d860b0f56d8f9938eba67829839ee08"
+      },
+      "comments": [
+        {
+          "author": "Bren2010",
+          "authorAssociation": "NONE",
+          "body": "@eomara Do you mind reviewing?",
+          "createdAt": "2020-07-21T21:50:13Z",
+          "updatedAt": "2020-07-21T21:50:13Z"
+        },
+        {
+          "author": "Bren2010",
+          "authorAssociation": "NONE",
+          "body": "@eomara Can you follow the instructions in the PR description please",
+          "createdAt": "2020-08-01T19:32:02Z",
+          "updatedAt": "2020-08-01T19:32:02Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOCu-kGM40QbmZ",
+      "title": "Porting history to main branch",
+      "url": "https://github.com/mlswg/mls-federation/pull/7",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-03-10T18:40:39Z",
+      "updatedAt": "2022-03-10T18:41:17Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "50f9c8ae3d1d1c2b3eeff54a0503a5739c11b978",
+      "headRepository": "mlswg/mls-federation",
+      "headRefName": "federation-import",
+      "headRefOid": "f521c5039d860b0f56d8f9938eba67829839ee08",
+      "closedAt": "2022-03-10T18:41:17Z",
+      "mergedAt": "2022-03-10T18:41:17Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "cda425ab02829f35b1d0c105e5e85fbffc8bca83"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOCu-kGM40Qdwa",
+      "title": "Changes to authors & contributors",
+      "url": "https://github.com/mlswg/mls-federation/pull/8",
+      "state": "CLOSED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-03-10T18:49:15Z",
+      "updatedAt": "2022-05-19T06:58:49Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "cda425ab02829f35b1d0c105e5e85fbffc8bca83",
+      "headRepository": "mlswg/mls-federation",
+      "headRefName": "authors-contributors",
+      "headRefOid": "59fb465ddd49b9c72b17a2fbe331c32a377d4726",
+      "closedAt": "2022-05-19T06:58:49Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "Closing in favor of #10.",
+          "createdAt": "2022-05-19T06:58:49Z",
+          "updatedAt": "2022-05-19T06:58:49Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOCu-kGM438e0d",
+      "title": "Notes on the AS in a federated setting",
+      "url": "https://github.com/mlswg/mls-federation/pull/9",
+      "state": "CLOSED",
+      "author": "kkohbrok",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-05-17T10:08:16Z",
+      "updatedAt": "2022-05-17T10:11:13Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "draftrevival",
+      "baseRefOid": "86d14c8aaa9a6aa1d3d2e59bf188d318e832c37f",
+      "headRepository": "raphaelrobert/mls-federation",
+      "headRefName": "konrad/fed-as",
+      "headRefOid": "7c303d79c353b3e047b8c87027313c058a354e87",
+      "closedAt": "2022-05-17T10:11:12Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "kkohbrok",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sorry, this was not meant to be a PR against this repo.",
+          "createdAt": "2022-05-17T10:11:12Z",
+          "updatedAt": "2022-05-17T10:11:12Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOCu-kGM44GMEo",
+      "title": "Revive draft",
+      "url": "https://github.com/mlswg/mls-federation/pull/10",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "* Revive draft\r\n\r\nCo-authored-by: Konrad Kohbrok <konrad.kohbrok@datashrine.de>",
+      "createdAt": "2022-05-19T06:56:08Z",
+      "updatedAt": "2022-05-19T06:58:09Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "cda425ab02829f35b1d0c105e5e85fbffc8bca83",
+      "headRepository": "raphaelrobert/mls-federation",
+      "headRefName": "main",
+      "headRefOid": "6d77a8e4340ae7e1e5cb95a3c2327d90014d143a",
+      "closedAt": "2022-05-19T06:58:09Z",
+      "mergedAt": "2022-05-19T06:58:09Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "87857e99a51248615a1d107c7b398858ab93bc60"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-22T01:41:57.451983+00:00",
+  "timestamp": "2024-09-15T00:39:55.068294+00:00",
   "repo": "mlswg/mls-federation",
   "labels": [
     {
@@ -19,14 +19,14 @@
       "color": "a2eeef"
     },
     {
-      "name": "help wanted",
-      "description": "Extra attention is needed",
-      "color": "008672"
-    },
-    {
       "name": "good first issue",
       "description": "Good for newcomers",
       "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
     },
     {
       "name": "invalid",
@@ -387,6 +387,90 @@
       "mergedBy": "raphaelrobert",
       "mergeCommit": {
         "oid": "87857e99a51248615a1d107c7b398858ab93bc60"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOCu-kGM5L6w9Z",
+      "title": "Change affiliation",
+      "url": "https://github.com/mlswg/mls-federation/pull/11",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-13T17:34:07Z",
+      "updatedAt": "2023-03-13T17:35:59Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "87857e99a51248615a1d107c7b398858ab93bc60",
+      "headRepository": "mlswg/mls-federation",
+      "headRefName": "draft-02",
+      "headRefOid": "6dbcf2a7e7ed5067e8650170813169826a373dd3",
+      "closedAt": "2023-03-13T17:35:59Z",
+      "mergedAt": "2023-03-13T17:35:59Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "ff124774e912844cb2250accf3445e9860ef90ce"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOCu-kGM5PiAhZ",
+      "title": "typo",
+      "url": "https://github.com/mlswg/mls-federation/pull/12",
+      "state": "MERGED",
+      "author": "dconnolly",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-01T20:53:13Z",
+      "updatedAt": "2023-05-01T22:42:29Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "ff124774e912844cb2250accf3445e9860ef90ce",
+      "headRepository": "dconnolly/mls-federation",
+      "headRefName": "patch-1",
+      "headRefOid": "7a6cbac025cd44fa2ce5a27a4fe0235bfe547114",
+      "closedAt": "2023-05-01T21:10:24Z",
+      "mergedAt": "2023-05-01T21:10:24Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "93c5dac03b879876434c4705d9ca4a5223be8ad2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOCu-kGM57Qn6j",
+      "title": "Update CI",
+      "url": "https://github.com/mlswg/mls-federation/pull/13",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-12T07:23:00Z",
+      "updatedAt": "2024-09-12T12:04:15Z",
+      "baseRepository": "mlswg/mls-federation",
+      "baseRefName": "main",
+      "baseRefOid": "93c5dac03b879876434c4705d9ca4a5223be8ad2",
+      "headRepository": "mlswg/mls-federation",
+      "headRefName": "update-ci",
+      "headRefOid": "114976e014d3ffc991483ca46b9365a617d7266f",
+      "closedAt": "2024-09-12T12:04:15Z",
+      "mergedAt": "2024-09-12T12:04:15Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "bcfe04c561fa9a1553b7467fa3fdf0de0e72938a"
       },
       "comments": [],
       "reviews": []

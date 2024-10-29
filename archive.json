@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-27T00:41:01.628501+00:00",
+  "timestamp": "2024-10-29T00:38:26.139787+00:00",
   "repo": "mlswg/mls-federation",
   "labels": [
     {
@@ -117,7 +117,7 @@
       "baseRepository": "mlswg/mls-federation",
       "baseRefName": "federation-import",
       "baseRefOid": "50f9c8ae3d1d1c2b3eeff54a0503a5739c11b978",
-      "headRepository": "raphaelrobert/mls-federation",
+      "headRepository": null,
       "headRefName": "patch-1",
       "headRefOid": "8dad678f8ec372ec244bf27484974464eb3fe519",
       "closedAt": "2019-10-09T03:21:08Z",
@@ -345,7 +345,7 @@
       "baseRepository": "mlswg/mls-federation",
       "baseRefName": "draftrevival",
       "baseRefOid": "86d14c8aaa9a6aa1d3d2e59bf188d318e832c37f",
-      "headRepository": "raphaelrobert/mls-federation",
+      "headRepository": null,
       "headRefName": "konrad/fed-as",
       "headRefOid": "7c303d79c353b3e047b8c87027313c058a354e87",
       "closedAt": "2022-05-17T10:11:12Z",
@@ -379,7 +379,7 @@
       "baseRepository": "mlswg/mls-federation",
       "baseRefName": "main",
       "baseRefOid": "cda425ab02829f35b1d0c105e5e85fbffc8bca83",
-      "headRepository": "raphaelrobert/mls-federation",
+      "headRepository": null,
       "headRefName": "main",
       "headRefOid": "6d77a8e4340ae7e1e5cb95a3c2327d90014d143a",
       "closedAt": "2022-05-19T06:58:09Z",
